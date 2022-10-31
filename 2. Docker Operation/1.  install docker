@@ -1,0 +1,59 @@
+# Step 1:  create flie "docker-compose.yml":
+
+version: "3.9"
+services:
+  ruby:
+    build:
+      context: ./contexts/ruby
+    container_name: ruby
+    volumes:
+      - ../../km:/code
+      - ./docker_volumes/ruby:/docker_volume
+    tty: true
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    ports:
+      - 3000:3000
+      - 3005:3005
+
+# Step 2: create file "Dockerfile":
+
+FROM ubuntu:22.04
+
+WORKDIR /code
+
+#install ruby
+RUN apt update
+RUN apt install -y ruby-full
+
+#install rails
+RUN apt install -y git curl autoconf bison build-essential libssl-dev libyaml-dev libreadline6-dev zlib1g-dev libncurses5-dev libffi-dev libgdbm6 libgdbm-dev libdb-dev
+
+RUN gem install rails
+
+#install sqlite3
+RUN apt install -y sqlite3
+
+# Step 3: install Docker:
+#######Docker-compose#######
+#https://docs.docker.com/compose/install/
+
+#1 Run this command to download the current stable release of Docker Compose:
+sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+
+
+#2 Apply executable permissions to the binary:
+sudo chmod +x /usr/local/bin/docker-compose
+
+#3 test
+docker-compose --version
+
+# Step 4: edit the config file:
+
+vim ~/.bashrc
+
+alias dc='docker-compose'
+alias d='docker'
+alias de='docker exec -it'
+
+alias rubyin='de ruby bash'
