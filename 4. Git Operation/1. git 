@@ -1,0 +1,55 @@
+################### submit codes steps #############
+1. git pull
+
+
+2. create branch
+git checkout -b 'promocode'
+
+
+3. bundle install
+
+
+4. generate model
+
+
+bin/rails g model PromoCode advertiser:references token:string
+
+bin/rails g model Invitation advertiser:references
+
+bin/rails g model Invitation advertiser:references user:references --force
+
+5.1 Add has many relationship
+5.2 check inheritance
+
+
+6. migrate
+
+
+bin/rake db:migrate
+bin/rake db:rollback
+
+
+7. test
+bin/rake cucumber
+
+8. lint
+bundle exec rubocop 
+
+9. git rebase
+
+10. git push
+
+
+################ Add git to repository ##############
+
+1. git --version
+2. ssh-keygen
+3. cd .ssh
+4. cd ~
+5. pwd
+6. cd .ssh
+7. ls 
+8. cat id_rsa.pub
+9. ############## copy the public key to the repository ssh keys ################
+
+

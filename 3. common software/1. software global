@@ -10,3 +10,15 @@ sudo apt install shutter
 ############### command simplify ######
 
 sudo apt install trash-cli
+
+
+#sunpinyin
+#1. Search all application for “Language Support”.
+#2. Click on “Install / Remove Languages”. Input method system should be “Ibus”.
+#3. Pick Chinese, and Apply Changes.
+#4. Open terminal and run sudo apt install ibus-sunpinyin
+#5. Log out and back in.
+#6. Go to Settings, and go to “Region and Languages”.
+#7. Under Input Sources, press the “+” sign and find “Chinese (Sun Pin Yin)”.
+#You now have Chinese input available when you press “Ctrl+Space” / “Win+Space”.
+#import word libary from bitbukcet or following link
