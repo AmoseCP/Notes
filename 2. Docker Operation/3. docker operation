@@ -1,0 +1,11 @@
+############# create container, if no container, it will create image base on docker file ###########
+docker-compose up 
+
+docker-compose start
+docker-compose stop
+
+########### delet docker-compose #######
+docker-compose down
+
+######### start ruby ########
+docker start ruby
