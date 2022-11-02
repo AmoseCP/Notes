@@ -1,0 +1,5 @@
+rails new demo
+cd demo
+rails generate scaffold User name:string facts:text
+
+sudo chown -R amose:amose demo
