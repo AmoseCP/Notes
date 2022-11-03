@@ -1,0 +1,10 @@
+new_record?() public
+
+Returns true if this object hasn’t been saved yet – that is, a record for the object doesn’t exist in the database yet; otherwise, returns false.
+new_record? will not check if the record has been destroyed
+
+
+persisted?() public
+
+Returns true if the record is persisted, i.e. it’s not a new record and it was not destroyed, otherwise returns false.
+persisted? will also check if the record has not been destroyed

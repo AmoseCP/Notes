@@ -1,0 +1,53 @@
+eg: Add a new comment to the article
+=======================================================================================
+<h2>Add a comment:</h2>
+<%= form_with model: [ @article, @article.comments.build ] do |form| %>
+  <p>
+    <%= form.label :commenter %><br>
+    <%= form.text_field :commenter %>
+  </p>
+  <p>
+    <%= form.label :body %><br>
+    <%= form.text_area :body %>
+  </p>
+  <p>
+    <%= form.submit %>
+  </p>
+<% end %>
+======================================================================================
+
+
+build(attributes = {}, &block) public
+Returns a new object of the collection type that has been instantiated with attributes and linked to this object, but have not yet been saved. 
+You can pass an array of attributes hashes, this will return an array with the new objects.
+Source code:
+=====================================================================================
+# File activerecord/lib/active_record/associations/collection_proxy.rb, line 318
+      def build(attributes = {}, &block)
+        @association.build(attributes, &block)
+      end
+=====================================================================================
+
+
+examle :
+================================================================================
+class Person
+  has_many :pets
+end
+
+person.pets.build
+# => #<Pet id: nil, name: nil, person_id: 1>
+
+person.pets.build(name: 'Fancy-Fancy')
+# => #<Pet id: nil, name: "Fancy-Fancy", person_id: 1>
+
+person.pets.build([{name: 'Spook'}, {name: 'Choo-Choo'}, {name: 'Brain'}])
+# => [
+#      #<Pet id: nil, name: "Spook", person_id: 1>,
+#      #<Pet id: nil, name: "Choo-Choo", person_id: 1>,
+#      #<Pet id: nil, name: "Brain", person_id: 1>
+#    ]
+
+person.pets.size  # => 5 # size of the collection
+person.pets.count # => 0 # count from database
+=================================================================================
