@@ -1,0 +1,28 @@
+***Before submit your codes, make sure they have passed all the tests.***
+Then do as below to submit your codes:
+
+===========Step 1: Record your own modifications ===========
+# make sure you're in your own branch, then
+git add .
+git commit -m"decripe what you did"
+
+===========Step 2: Get the newest main branch ===========
+git check main
+git pull 
+
+===========Step 3: Rebase, to put your own branch on the top of main branch ===========
+git checkout your-own-branch-name
+git rebase main
+# if there is any conflicts, look at the hints, and deal with it. 
+
+===========Step 4: Synchronize the newest your-own-branch to main branch ===========
+git checkout main
+git merge your-own-branch-name
+
+===========Step 5: Submit your codes ===========
+git push
+
+===========Step 6: Delete your own branch ===========
+git branch -d your-own-branch-name
+
+
