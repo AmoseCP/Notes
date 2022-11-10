@@ -2,3 +2,8 @@
 
 cat /proc/cpuinfo
 sudo lshw -class memory
+
+#GPU
+lspci | grep -i nvidia 
+nvidia-smi
+sudo /usr/bin/nvidia-uninstall
