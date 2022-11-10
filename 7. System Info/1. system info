@@ -1,0 +1,4 @@
+# look for CPU/Memory information
+
+cat /proc/cpuinfo
+sudo lshw -class memory
