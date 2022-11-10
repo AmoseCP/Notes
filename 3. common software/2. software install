@@ -76,3 +76,32 @@ sudo usermod -aG docker ${USER}
 
 docker --version
 #restart computer, then without sudo works
+
+#######Docker-compose#######
+#https://docs.docker.com/compose/install/
+#1 Run this command to download the current stable release of Docker Compose:
+sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+
+
+#2 Apply executable permissions to the binary:
+sudo chmod +x /usr/local/bin/docker-compose
+
+#3 test
+docker-compose --version
+
+
+#shutter
+sudo add-apt-repository -y ppa:linuxuprising/shutter
+sudo apt install shutter
+
+#sunpinyin
+#1. Search all application for “Language Support”.
+#2. Click on “Install / Remove Languages”. Input method system should be “Ibus”.
+#3. Pick Chinese, and Apply Changes.
+#4. Open terminal and run sudo apt install ibus-sunpinyin
+#5. Log out and back in.
+#6. Go to Settings, and go to “Region and Languages”.
+#7. Under Input Sources, press the “+” sign and find “Chinese (Sun Pin Yin)”.
+#You now have Chinese input available when you press “Ctrl+Space” / “Win+Space”.
+#import word libary from bitbukcet or following link
+#https://code.google.com/archive/p/hslinuxextra/downloads
