@@ -1,0 +1,2 @@
+rails new myapp
+rails g scaffold Modelname tittle:string content:text (tittle, content..params can be blank)
