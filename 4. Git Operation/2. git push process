@@ -7,7 +7,7 @@ git add .
 git commit -m"decripe what you did"
 
 ===========Step 2: Get the newest main branch ===========
-git check main
+git checkout main
 git pull 
 
 ===========Step 3: Rebase, to put your own branch on the top of main branch ===========
