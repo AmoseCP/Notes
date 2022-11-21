@@ -1,0 +1,13 @@
+=========== %W ==================================================
+
+The lower-case %w percent literal:
+treats all supplied words in the brackets as single-quoted Strings
+does not interpolate Strings
+does not escape sequences
+escapes only whitespaces by \
+ 
+The upper-case %W percent literal:
+treats all supplied words in the brackets as double-quoted Strings
+allows String interpolation
+escapes sequences
+escapes also whitespaces by \
