@@ -1,0 +1,25 @@
+"test".capitalize      # Test
+"Test".downcase        # test
+"Test".chop            # Tes
+"Test".next            # Tesu
+"Test".reverse         # tseT
+"Test".sum             # 416
+"Test".swapcase        # tEST
+"Test".upcase          # TEST
+"Test".upcase.reverse  # TSET
+"Test".next            # TSEU  ===“increments” the last character==
+"Test" + "Test"        # TestTest
+
+＊＊当不在一个具体的类里面定义一个方法的时候，这个方法属于Object类＊＊
+def dog_barking
+  puts "Woof!"
+end
+
+这个dog_barking方法看起来不属于任何类，用这个方法method(:dog_barking).owner可以查到其属于Object类，
+而且是私有方法。
+
+Object.send(:methods) 可以查看Object所有方法
+Object.send(:private_methods) 查看所有私有方法
+
+＊＊ 像puts等，前面没有类名的方法，属于Kernel，它是module, 所以其实可以写成Kernel.puts＊＊
+
