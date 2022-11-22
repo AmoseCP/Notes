@@ -1,0 +1,87 @@
+ruby的变量使用之前一定要赋值，或者叫初始化。
+变量赋值有两种方式,如：
+name = "Amose Ding"
+或：
+"Amose Ding" => name
+
+**变量命名不能有空格，要必字母或下划线开头，只能包含字母，数字，下划线，区分大小写。**
+
+**在条件控制中，unless和if可以看作相反的。**
+age = 24
+puts "Hello World" if age > 12 && age < 20      ===这行不会打印出来
+puts "Hello World" unless age > 12 && age < 20  ===这行会打印出来
+可以看出，unless如果满足后面条件就不执行前面，后面条件不满足才执行前面
+
+age.between?(10,24)表示age是否处于[10,24]之间，结果是true
+
+表达式 x <=> y 是比较，如果x和y相等，返回0,如果x > y，返回 1，如果经x < y返回 －1
+
+x == y 判断是否相等, x != y，判断是否不相等
+
+&&表示“且”， ||表示“或”
+注意：使用此类表达式(age < 18 || age > 85)的时候最好用括号
+
+这行代码5.times do puts "Test" end会打印五次"Test", 其中times方法对所有整数都可以用
+也可以写成5.times {puts "Test"}
+
+ruby迭代：
+1.upto(5) { ...code to loop here... }    表示[1,5]
+10.downto(5) { ...code to loop here... } 表示10往下到5
+0.step(50, 5) { ...code to loop here... } 表示从0到50，以5为步长
+例如：
+1.upto(5) { |number| puts number }会把1，2，3，4，5打印出来
+相当于：
+1.upto(5) do |number|
+    puts number
+end
+
+在ruby中，整数与整数运算，结果是整数， 如 10/3的结果是3， 10.0/3的结果有很多位小数
+.to_f方法，将整数转为浮点数
+.to_i方法，将浮点数转为整数,(直接取整数部分，没有四舍五入)
+.to_s方法，将其它变量转为字符串
+
+常量的名字常常以大写字母开头 Pi = 3.14
+可以改变常量的值，但是会收到警告warning: already initialized constant Pi
+
+字符串太长换行写法，可以用花括号，单书名号，小括号甚至是双感叹号！定界
+x = %q{This is a test
+of the multi
+line capabilities}
+或：
+x = %q!This is a test
+of the multi
+line capabilities!
+其中q是quote的意思，引号
+如果用双感叹号定界，界限里面的感叹号会提前结束字符串。
+当然，也可以这样写：
+x = <<END_MY_STRING_PLEASE
+This is the string
+And a second line
+END_MY_STRING_PLEASE
+其中END_MY_STRING_PLEASE可以自定义，但不能包含空格。
+
+puts "abc" * 5结果是abcabcabcabcabc
+puts "y" > "x"结果是true
+puts "x".ord结果是120，利用ord方法，可以查到字符对应的ASCII码
+puts 120.chr与上面执行相反操作，结果是"x"
+
+字符串插值：
+x = 10
+y = 20
+puts "#{x} + #{y} = #{x + y}"
+打印结果是 "10 + 20 = 30"
+puts "100 * 5 = #{100 * 5}"打印结果是 "100 * 5 = 500"
+puts "It's a #{"bad " * 5}world"结果是 "It's a bad bad bad bad bad world"
+
+
+
+
+
+
+
+
+
+
+
+
+

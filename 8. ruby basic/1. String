@@ -3,12 +3,13 @@
 "Test".chop            # Tes
 "Test".next            # Tesu
 "Test".reverse         # tseT
-"Test".sum             # 416
+"Test".sum             # 416  ===计算每个字符对应的ASCII码数字之和
 "Test".swapcase        # tEST
 "Test".upcase          # TEST
 "Test".upcase.reverse  # TSET
 "Test".next            # TSEU  ===“increments” the last character==
 "Test" + "Test"        # TestTest
+"TEST".length          # 4  ===与.size方法相同
 
 ＊＊当不在一个具体的类里面定义一个方法的时候，这个方法属于Object类＊＊
 def dog_barking
@@ -22,4 +23,57 @@ Object.send(:methods) 可以查看Object所有方法
 Object.send(:private_methods) 查看所有私有方法
 
 ＊＊ 像puts等，前面没有类名的方法，属于Kernel，它是module, 所以其实可以写成Kernel.puts＊＊
+
+正则表达式：
+puts "Amoseting".sub('ting', 'ding' ) 结果是"Amoseding"
+其中sub是substitute，代替的意思, 只代替一次,而gsub执行代替多次。
+puts "this is a test".gsub('i', '') 结果是"ths s a test"
+puts "This is a test".sub(/^../, 'Hello')结果是"Hellois is a test", 正则表示，匹配开头的两个字符。
+其中/^../ means “any two characters immediately after the start of a line.”
+而/..$/正则表示匹配末尾两个字符
+"xyz".scan(/./) { |letter| puts letter }打印出字符串中的每个字符。
+"This is a test".scan(/../) { |x| puts x }打印出字符串中每两个字符。
+
+^   ＃ Anchor for the beginning of a line 匹配一行的开头
+$   # Anchor for the end of a line 匹配一行的结尾
+\A  # Anchor for the start of a string 匹配字符串开头
+\z  # Anchor for the end of a string 匹配字符串的结尾
+.   # Any character 匹配单个字符
+\w  # Any letter, digit, or underscore 匹配字母，数字和下划线
+\W  # Anything that \w doesn’t match 匹配非字母，非数字和非下划线
+\d  # Any digit 匹配数字 /\d+/表示在一行中匹配字符串中的所有数字，这样100不会被分拆成1和两个0
+\D  # Anything that \d doesn’t match (non-digits) 匹配非数字 
+\s  # Whitespace (spaces, tabs, newlines, and so on) 匹配空格，制表符，新行等
+\S  # Non-whitespace (any visible character) 匹配字符。
+*   # Match zero or more occurrences of the preceding character, and match as many as
+      possible.
++   # Match one or more occurrences of the preceding character, and match as many as
+      possible.
+*?  # Match zero or more occurrences of the preceding character, and match as few as
+      possible.
++?  # Match one or more occurrences of the preceding character, and match as few as
+      possible.
+?   # Match either one or none of the preceding character.
+{x} # Match x occurrences of the preceding character.
+{x,y}   # Match at least x occurrences and at most y occurrences.
+
+"This is a test".scan(/[aeiou]/) { |x| puts x }结果是把字符串中的元音小写字母一个个打印出来。
+"This is a test".scan(/[a-m]/) { |x| puts x }结果是把字符串中的从a-m的小写字母一个个打印出来。
+puts "String has vowels" if "This is a test" =~ /[aeiou]/会打印出前面那句，因为后面是true,
+其中=~是匹配符，返回第一次匹配到的位置，或者没有匹配到就返回nil。
+在正则表达式中，如果用括号将正则里的两个表达式括起来，则会先匹配一起满足的，再在一起满足的部分中，分开匹配。
+比如"amoseis100yuan".match(/(\D)(\d)/)先匹配到"amoseis100",这是一起满足的，再在这个结果中分开匹配，得到"amoseis"
+和“100”，所以这个正则的结果是像数组一样的MatchData Object，有三个元素"amoseis100","amoseis"和"100"
+
+String的match方法
+x = "This is a test".match(/(\w+) (\w+)/)
+puts x[0] 结果是"This is"
+puts x[1] 结果是“This”
+puts x[2] 结果是“is” 
+
+
+
+
+
+
 
