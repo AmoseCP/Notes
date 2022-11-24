@@ -1,0 +1,182 @@
+if and unless
+==================
+unless is just the opposite of if, also supply the else condition
+
+==================
+the Ternary Operator 三元运算符 ？
+<condition> ? <result if condition is true> : <result if condition is false>
+
+==================
+elsif and case
+示例：
+fruit = "orange"
+
+case fruit
+when "orange"
+  color = "orange"
+when "apple"
+  color = "green"
+when "banana"
+  color = "yellow"
+else
+  color = "unknown"
+end
+上面示例也可以写成：
+fruit = "orange"
+
+color = case fruit
+when "orange"
+  "orange"
+when "apple"
+  "green"
+when "banana"
+  "yellow"
+else
+  "unknown"
+end
+
+==================
+case pattern matching
+示例：
+response = { error: 'Bad Gateway', code: 502 }
+case response
+in { data: data, code: code }
+  puts "Success #{data}, Code: #{code}"
+in { error: error, code: code }
+  puts "Error: #{error}, Code: #{code}"
+end
+
+# => "Error: Bad Gateway, Code: 502"
+
+在上面示例中，如果没有匹配到模式(pattern)，Ruby会抛出异常"NoMatchingPattern error"
+对应的是case/when statement则不会抛出异常，而是返回nil
+pattern matching可以用于hash, array, range, 甚至object，就是说case...in后面可以跟上任意对象
+====================================================================================
+while and until
+示例1：
+x = 1
+while x < 100
+  puts x
+  x = x * 2
+end
+示例2， until provides the opposite functionality, looping until a certain condition is met:
+x = 1
+until x > 99
+  puts x
+  x = x * 2
+end
+另外，while/untill也可以用在单行：
+i = 1
+i = i * 2 until i > 1000
+puts i
+
+# => 1024
+=====================================================================================
+Code Blocks代码块，在花括号中的代码，作为参数的代码块只能有一个（代码块本身的参数不限）：
+以下三个示例结果相同
+示例1：
+x = [1, 2, 3]
+x.each { |y| puts y }
+示例2：
+x = [1, 2, 3]
+x.each do |y|
+puts y
+end
+示例3：
+x = [1, 2, 3]
+x.each do
+  puts _1
+end
+注意：示例三中，用了数字化的参数number parameter
+=============================================================================
+The to_s function in Ruby returns a string containing the place-value representation of int with radix base (between 2 and 36). 
+If no base is provided in the parameter then it assumes the base to be 10 and returns. 
+Syntax:     number.to_s(base)
+如：
+10.to_s(2)
+# => "1010"
+=================================================================================
+[[1, 2, 3, 4], ["e", "f", "g", "h", "m"]].each {p _5}
+# => 
+nil 
+"m"
+===================================================================================
+def each_vowel(&code_block)
+  %w{a e i o u}.each { |vowel| code_block.call(vowel) }
+end
+each_vowel { |vowel| puts vowel }
+# =>
+"a"
+"e"
+"i"
+"o"
+"u"
+解释：each_vowel是个方法，接收代码块为参数(用&符号表示)，然后对数组%w{a e i o u}进行迭代，
+对于数组的每一个元素代码块使用.call方法来执行代码块中的内容，将元素作为参数传递给代码块。
+其中，%w用于由空格而不是逗号分隔且周围没有引号的字符串数组，如%w(foo bar)就相当于["foo", "bar"]。
+上面示例也可以写成：
+def each_vowel
+%w{a e i o u}.each { |vowel| yield vowel }
+end
+each_vowel { |vowel| puts vowel }
+其中yield自动识别传过来的代码块，并将控制权交给该代码块。
+======================================================================================
+It’s also possible to store code blocks within variables, using a Proc，如
+print_parameter_to_screen = Proc.new { |x| puts x }
+print_parameter_to_screen.call(100)
+# => 100
+
+===================================================================================
+lambda is another way to define code blocks. There are a couple of
+differences between a proc and lambda. Lambdas check if the number of
+parameters matches the signature. If a lambda defines two parameters and your
+code provides one, you get an error. Another difference is a lambda returns just
+like a Ruby method, while a proc returns from the current context.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

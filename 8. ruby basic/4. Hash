@@ -1,0 +1,69 @@
+Arrays are collections of objects, and so are hashes. However, hashes have a different
+storage format and way to define each object within the collection.
+
+dictionary = { cat: "feline animal", dog: "canine animal" }
+(前面是key，后面是value,两者可以是任意对象/类型，value可以重新赋值)
+The variable storing the hash is dictionary, and it contains two entries:
+
+puts dictionary.size
+# => 2
+
+puts dictionary[:cat]
+# => "feline animal"
+
+
+哈希的.each方法：
+x = { "a" => 1, "b" => 2 }
+x.each { |key, value| puts "#{key} equals #{value}" }
+
+# => 
+"a equals 1"
+"b equals 2"
+Note: Since Ruby 1.9, the order in which the elements were inserted into the
+hash will be remembered, and each will return them in that order.
+
+检索keys,此方法返回一个数组：
+x = { a: 1, b: 2, c: 3 }
+p x.keys
+
+# => [:a, :b, :c]
+检索values,此方法返回一个数组：
+x = { a: 1, b: 2, c: 3 }
+p x.values
+
+# => [1, 2, 3]
+
+删除哈希元素, 用.delete方法：
+x = { a: 1, b: 2 }
+x.delete(:a)
+p x
+
+# => {:b=>2}
+
+条件性删除hash, 用.delete_if方法：
+x = { a: 100, b: 20 }
+x.delete_if { |key, value| value < 25 }
+p x
+
+# => {:a=>100}
+
+哈希中可以有任意对象，包括哈希：
+people = {
+  fred: {
+    name: "Fred Elliott",
+    age: 63,
+    gender: "male",
+    favorite_painters: ["Monet", "Constable", "Da Vinci"]
+  },
+  janet: {
+    name: "Janet S Porter",
+    age: 55,
+    gender: "female"
+  }
+}
+puts people[:fred][:age]        # => 63
+puts people[:janet][:gender]    # => "female"
+puts people[:janet]             # => {:name=>”Janet S Porter", :age=>55, :gender=>"female"}
+puts people[:fred][:favorite_painters].length       # => 3
+puts people[:fred][:favorite_painters].join(", ")   # => "Monet, Constable, Da Vinci"
+

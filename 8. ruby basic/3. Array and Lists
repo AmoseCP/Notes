@@ -32,9 +32,146 @@ puts "Short sentence. Another. No more.".split(/\./).inspect结果是["Short sen
 The inspect method is common to almost all built-in classes in Ruby, and it gives
 you a textual representation of the object.
 
+puts "Words with lots of spaces".split(/\s+/).inspect 
+或者 p "Words with lots of spaces".split(/\s+/)
+(p不要在生产环境中使用，它的作用是自动显示对象的结构，返回其后面的表达式，相当于puts....inspect。）
+结果是'["Words", "with", "lots", "of", "spaces"]'
 
+数组的迭代/遍历
+.each方法：
+[1, "test", 2, 3, 4].each { |element| puts element.to_s + "X" }
 
+.collect方法，和.map方法功能相同：
+[1, 2, 3, 4].collect { |element| element * 2 }
 
+传统遍历方法，基本不用：
+a = [1, "test", 2, 3, 4]
+i = 0
+while (i < a.length)
+    puts a[i].to_s + "X"
+    i += 1
+end
+
+=========map,select,collect,each, inject, detect方法比较=========
+Map:
+Map takes the enumerable object and a block, evaluates the block for each element and then return a new array with the calculated values.
+[1,2,3,4,5,6,7,8,9,10].map{ |e| e * 5 }
+# =>  [5, 10, 15, 20, 25, 30, 35, 40, 45, 50]
+
+[1,2,3,4,5,6,7,8,9,10].map{ |e| e <= 3 }
+# =>  [true, true, true, false, false, false, false, false, false, false]
+注意：你也可以用.map!方法来保存原来的变量
+a = [1,2,3,4,5,6]
+a.map! {|x| x + 1}
+puts a.inspect
+=> [2, 3, 4, 5, 6, 7]
+
+其中区别如下：
+===================================================================================
+Array#map:
+Invokes the given block once for each element of self.
+Creates a new array containing the values returned by the block.
+
+Array#map!
+Invokes the given block once for each element of self, replacing the
+element with the value returned by the block.
+
+Methods ending with ! usually modify the original object.
+===================================================================================
+
+Select:
+Select evaluates the block with each element for which the block returns true,
+and also, select would return a element for which the statement is true.
+[1,2,3,4,5,6,7,8,9,10].select{ |e| e > 5 }
+# =>  [6 ,7, 8, 9, 10]
+
+[1,2,3,4,5,6,7,8,9,10].select{ |e| e * 3 }
+# => [1,2,3,4,5,6,7,8,9,10]
+注意：你也可以用.select!来改变对象，而不是赋值给原来的初始变量名
+a = [1,2,3,4,5]
+a.select! {|x| x > 3}
+puts a.inspect
+=> [4, 5]
+
+Collect:
+与map相同，takes the enumerable object and a block, evaluates the block for each element and then return a new array with the calculated values.
+[1,2,3,4,5,6,7,8,9,10].collect{ |e| e * 5 }
+# =>  [5, 10, 15, 20, 25, 30, 35, 40, 45, 50]
+
+[1,2,3,4,5,6,7,8,9,10].collect{ |e| e <= 3 }
+# =>  [true, true, true, false, false, false, false, false, false, false]
+
+Each:
+Each will evaluate the block with each array and will return the original array not the calculated one.
+[1,2,3,4,5,6,7,8,9,10].each{ |e| print "#{e}!" e * 3 }
+1!2!3!4!5!6!7!8!9!10! => [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+If you are try to use each to select any specific values like where e <= 3 then it will evaluate each element but returns the original array:
+[1,2,3,4,5,6,7,8,9,10].each{ |e| e <= 3 }
+# => [1,2,3,4,5,6,7,8,9,10]
+
+Inject:
+Takes an accumulator (sum) and changes it as many times as there are elements in the array. Returns the final value of the accumulator.
+If you do not explicitly specify an initial value for accumlator, then uses the first element of collection is used as the initial value of accumulator.
+[1,2,3,4,5,6,7,8,9,10].inject{ |sum, e| sum += e }
+# => 55
+
+[1,2,3,4,5,6,7,8,9,10].inject(15){ |sum, e| sum += e }
+# => 70
+
+Detect:
+Detect is equal to select.first. Detect evaluates the block with each element for which the block returns true, but gives back only the first element as the result.
+[1,2,3,4,5,6,7,8,9,10].detect{ |e| e > 5 }
+# => 6
+and also, detect would return the first element for which the statement is true.
+[1,2,3,4,5,6,7,8,9,10].detect{ |e| e * 3 }
+# => 1
+
+Each_with_index:
+This allows checking the index of the current value being iterated over.
+pets = ['dog','fish','cat','frog','pig']
+pets.each_with_index do |val, idx|
+ puts idx.to_s + ": " + val
+end
+=> 0: dog
+=> 1: fish
+=> 2: cat
+=> 3: frog
+=> 4: pig
+
+实际用例：
+pets = ['dog','fish','cat','frog','pig']
+pets.each_with_index do |val, idx|
+ puts pets[idx-1] + ' -> ' + val
+end
+=> pig -> dog
+=> dog -> fish
+=> fish -> cat
+=> cat -> frog
+=> frog -> pig
+
+两个数组的“加法”：
+x = [1, 2, 3]
+y = [1，"a", "b", "c"]
+z = x + y
+p z
+结果是[1, 2, 3, 1, "a", "b", "c"]
+
+两个数组的“减法”：
+“减去”第一个数组中，与第二个数组中的相同元素(并且不会加上和第二个数组相比而不同的元素)
+x = [1, 2, 3]
+y = [1, "a"]
+z = x - y
+p z
+结果是[2,3]
+
+数组的.empty?方法，检查数组是否是空数组,返回true或者false
+数组的.include?方法，检查数组中是否含有某个对象，返回true或者false
+数组的.first和.last方法，返回数组的第一个和最后一个元素
+x = [1, 2, 3]
+puts x.first(2).join("-")
+# => "1-2"
+数组的.reverse方法，将数组元素倒序排列
 
 
 
