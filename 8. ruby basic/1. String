@@ -71,6 +71,9 @@ puts x[0] 结果是"This is"
 puts x[1] 结果是“This”
 puts x[2] 结果是“is” 
 
+=================================================================
+=~ is known as the "match operator" and can be used to match a string against a regular expression.
+
 
 
 
