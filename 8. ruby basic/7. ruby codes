@@ -1,0 +1,62 @@
+打开文件，显示每一行：
+File.open("oliver.txt").each {|line| puts line}
+
+读文件，返回行数：
+lines = File.readlines("oliver.txt")
+
+puts "this is a test".scan(/\w+/).length  # => 4
+puts "this is a test".split.length        # => 4
+****by default, split will split by whitespace (single or multiple characters
+of spaces, tabs, newlines, and so on)****
+
+text = "First-class decisions require clear-headed thinking."
+puts "Scan method: #{text.scan(/\w+/).length}"
+puts "Split method: #{text.split.length}"
+# =>
+"Scan method: 7"
+"Split method: 5"
+****The scan method is looking through for all blocks of alphanumeric
+characters****
+===============================================================
+给文字分句：
+puts "Test code! It works. Does it? Yes.".split(/\.|\?|!/).length
+# => 4
+
+给文章分段：
+text = %q{
+This is a test of
+paragraph one.
+This is a test of
+paragraph two.
+This is a test of
+paragraph three.
+}
+puts text.split(/\n\n/).length
+# => 3
+=================================================================
+text = %q{Los Angeles has some of the nicest weather in the country.}
+stopwords = %w{the a by on for of are with just but and to the my in I has some}
+words = text.scan(/\w+/)
+keywords = words.select { |word| !stopwords.include?(word) }
+puts keywords.join(' ')
+# => "Los Angeles nicest weather country"
+======================================================================================
+text = %q{
+Ruby is a great programming language. It is object oriented
+and has many groovy features. Some people don't like it, but that's
+not our problem! It's easy to learn. It's great. To learn more about Ruby,
+visit the official Ruby website today.
+}
+sentences = text.gsub(/\s+/, ' ').strip.split(/\.|\?|!/)
+sentences_sorted = sentences.sort_by { |sentence| sentence.length }
+one_third = sentences_sorted.length / 3
+ideal_sentences = sentences_sorted.slice(one_third, one_third + 1)
+ideal_sentences = ideal_sentences.select { |sentence| sentence =~ /is|are/
+}
+puts ideal_sentences.join(". ")
+
+# => "Ruby is a great programming language.  It is object oriented and has many groovy features"
+说明：
+The gsub gets rid of all large areas of whitespace and replaces them with a single space (\s+ meaning “one or more whitespace characters”).
+The strip removes all extra whitespace from the start and end of the string.
+Sort the sentences by their lengths, as you want to ignore the shortest third and the longest third.

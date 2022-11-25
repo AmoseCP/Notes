@@ -79,7 +79,7 @@ element with the value returned by the block.
 Methods ending with ! usually modify the original object.
 ===================================================================================
 
-Select:
+Select: 对hash和array都可用
 Select evaluates the block with each element for which the block returns true,
 and also, select would return a element for which the statement is true.
 [1,2,3,4,5,6,7,8,9,10].select{ |e| e > 5 }
@@ -173,6 +173,30 @@ puts x.first(2).join("-")
 # => "1-2"
 数组的.reverse方法，将数组元素倒序排列
 
+=============================================================
+Syntax: Array.reject()
+Parameter: Array
+Return: new array containing the items in self for which the given block is not true
 
 
+# Ruby code for reject() method
+a = [18, 22, 33, 3, 5, 6]
+b = [1, 4, 1, 1, 88, 9]
+c = [18, 22, 3, 3, 50, 6]
+  
+
+puts "reject method : #{a.reject {|num| num > 10 }}"
+# => reject method : [3, 5, 6]
+puts "reject method : #{b.reject {|x| x.odd? }}"
+# => "reject method : [4, 88]"
+puts "reject method : #{c.reject {|num| num.even? }}"
+# => "reject method : [3, 3]"
+==========================================================================
+Syntax: Array.slice()
+Parameter: Array
+Return: a subarray specified by range of indices.
+
+a = [18, 22, 33, nil, 5, 6]
+puts "slice() method form : #{a.slice(2, 4)}"
+# => "slice() method form : [33, nil, 5, 6]"
 
