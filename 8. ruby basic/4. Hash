@@ -1,5 +1,6 @@
 Arrays are collections of objects, and so are hashes. However, hashes have a different
-storage format and way to define each object within the collection.
+storage format and way to define each object within the collection. Items inside a
+hash have no specific order.
 
 dictionary = { cat: "feline animal", dog: "canine animal" }
 (前面是key，后面是value,两者可以是任意对象/类型，value可以重新赋值)
