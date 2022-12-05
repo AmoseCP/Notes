@@ -73,7 +73,27 @@ puts "#{x} + #{y} = #{x + y}"
 puts "100 * 5 = #{100 * 5}"打印结果是 "100 * 5 = 500"
 puts "It's a #{"bad " * 5}world"结果是 "It's a bad bad bad bad bad world"
 
+=====================================
+全局变量以$开头，实例变量以@开头，类变量以@@开头命名
+类变量示例：
+class Square
+  def initialize
+    if defined?(@@number_of_squares)
+      @@number_of_squares += 1
+    else
+      @@number_of_squares = 1
+    end
+  end
+  def self.count
+    @@number_of_squares
+  end
+end
 
+a = Square.new
+b = Square.new
+puts Square.count 
+# => 2
+=================================================================== 
 
 
 

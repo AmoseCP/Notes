@@ -60,3 +60,16 @@ puts ideal_sentences.join(". ")
 The gsub gets rid of all large areas of whitespace and replaces them with a single space (\s+ meaning “one or more whitespace characters”).
 The strip removes all extra whitespace from the start and end of the string.
 Sort the sentences by their lengths, as you want to ignore the shortest third and the longest third.
+=========================================================================================
+method instance_variables returns the names of any object variables associated with an instance (as opposed to class variables):
+
+class Person
+  attr_accessor :name, :age
+end
+p = Person.new
+p.name = "Fred"
+p.age = 20
+puts p.instance_variables
+
+# => @name
+# => @age

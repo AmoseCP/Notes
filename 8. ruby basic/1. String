@@ -74,7 +74,11 @@ puts x[2] 结果是“is”
 =================================================================
 =~ is known as the "match operator" and can be used to match a string against a regular expression.
 
-
+=================================================
+a = "This is a test"
+puts a.methods.join(' ')
+# => 结果会打印出当前对象ａ的所有能用的方法。
+===================================================
 
 
 
