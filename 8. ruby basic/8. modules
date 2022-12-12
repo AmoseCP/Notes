@@ -1,0 +1,155 @@
+module的用法，不可继承
+示例1：
+module UsefulFeatures
+  def class_name
+    self.class.to_s
+  end
+end
+class Person
+  include UsefulFeatures
+end
+x = Person.new
+puts x.class_name
+# => "Person"
+
+示例2：
+module AnotherModule
+  def do_stuff
+    puts "This is a test"
+  end
+end
+
+include AnotherModule
+do_stuff
+# => "This is a test"
+由上可以看出，module可在域外其它类中使用，也可以在当前域中直接使用
+========================================================
+取数组中的最大值示例：
+my_array = %w{10 56 92 3 49 588 18}
+highest_number = 0
+my_array.each do |number|
+  number = number.to_i
+  highest_number = number if number > highest_number
+end
+puts highest_number
+# => 588
+=======================================================
+Enumerable module有大约20种常用方法，包括collect, detect, find, find_all, include?, max, min,
+select, sort, and to_a，如果类中可以实现each方法，那就可以include Enumerable，然后可以用这个module里面的全部方法了
+示例1：
+[1,2,3,4].collect { |i| i.to_s + "x" }
+# => ["1x", "2x", "3x", "4x"]
+示例2：
+[1,2,3,4].detect { |i| i.between?(2,3) }
+# => 2
+示例3：
+[1,2,3,4].select { |i| i.between?(2,3) }
+# => => [2,3]
+示例4：
+[4,1,3,2].sort
+# => [1,2,3,4]
+示例5：
+[1,2,3,4].max  # => 4
+[1,2,3,4].min  # => 1
+============================================================================
+自定义类实面each方法
+class AllVowels
+  VOWELS = %w{a e i o u}
+  def each
+    VOWELS.each { |v| yield v }
+  end
+end
+
+x = AllVowels.new
+x.each { |v| puts v }             # => 结果是a e i o u 
+x.collect { |i| i + "x" }         # => ["ax", "ex", "ix", "ox", "ux"]
+x.detect { |i| i > "j" }          # => "o"
+x.select { |i| i > "j" }          # => ["o", "u"]
+x.sort    # => ["a", "e", "i", "o", "u"]
+x.max     # => "u"
+x.min     # => "a"
+================================================================================================
+Comparable module的方法有：
+<, <=, ==, >=, >, between?
+Comparable module,使用比较操作符<=>，如果后面参数较大返回－1，相等则返回0，较小就返回1，如：
+1 <=> 2 返回-1
+=============================================================================================================
+class Song
+  include Comparable
+  attr_accessor :length
+  def <=>(other)
+    @length <=> other.length
+  end
+  def initialize(song_name, length)
+    @song_name = song_name
+    @length = length
+  end
+end
+a = Song.new('Rock around the clock', 143)
+b = Song.new('Bohemian Rhapsody', 544)
+c = Song.new('Minute Waltz', 60)
+
+a < b 返回true
+b >= c 返回true
+c > a 返回false
+a.between?(c,b) 返回true
+============================================================================
+To use static typing via an opt-in system called RBS:
+
+# sig/employee.rbs
+class Employee
+  attr_reader name: String
+  attr_reader security_level: Integer
+  attr_reader email_addresses: Array[String]
+  def initialize: (name: String, security_level:Integer) -> void
+  def access_granted?: (level:Integer) -> bool
+end
+
+=============================================================================
+A struct is a special class whose only job is to have attributes and to hold data,如：
+Person = Struct.new(:name, :gender, :age)
+fred = Person.new("Fred", "male", 50)
+chris = Person.new("Chris", "male", 25)
+puts fred.age + chris.age
+# => 75
+其中第一行代码约等于(不一样的地方在于第一行代码的参数是可选的，下面代码必须要3个参数)：
+class Person
+  attr_accessor :name, :gender, :age
+  def initialize(name, gender, age)
+    @name = name
+    @gender = gender
+    @age = age
+  end
+end
+===============================================================================================
+ATTR_ACCESSOR的作用：
+class Person
+  attr_accessor :name, :age
+end
+x = Person.new
+x.name = "Fred"
+x.age = 10
+puts x.name, x.age
+
+attr_accessor在类中的作用就相等于：
+class Person
+  def name
+    @name
+  end
+
+  def name=(name)
+    @name = name
+  end
+
+  def age
+    @age
+  end
+
+  def age=(age)
+    @age = age
+  end
+end
+上面的setter方法中，用到了等于号，这是Ruby的赋值方式。比如，x.name = "Fred"其实就是 x.name=("Fred").
+
+
+
