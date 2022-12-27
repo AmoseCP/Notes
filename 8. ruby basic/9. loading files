@@ -1,8 +1,35 @@
 load 每次使用会重新加载外部文件一次，需要加上文件的扩展名
 require和require_relative仅加载外部文件一次
-require './文件'相当于require_relative'文件'，默认文件扩展名为.rb 
+require './文件'相当于require_relative'文件'，默认文件扩展名为.rb
+load和require_relative可以加载本地文件，require则不然
+$: 或者$LOAD_PATH用来存储文件查询路径。
+例如以下示例，将本机的文件路径都打印出来了
+$:.each { |d| puts d }
+示例2：
+$debug_mode = 0
+require_relative $debug_mode == 0 ? "normal-classes" : "debug-classes"
+全局变量设为0，如果是0就引入normal-classes,否则就引入debug-classes
+
+示例3：
+%w{file1 file2 file3 file4 file5}.each { |file| require file }
+指量加载文件，可读性有欠缺
 
 Note: 
 Ruby programmers nearly always use require or require_relative
 rather than load. The effects of load are useful only if the code in the external file
 has changed or if it contains active code that will be executed immediately.
+
+如果想要加载文件夹，可以这样做：
+$:.push '/your/directory/here'
+require 'yourfile'
+具体示例：
+$:.push '/code2/rubytest'
+require 'my_test'
+
+
+注意 $:是个数组，所以可以往里面加额外的项，或者使用unshift加一个元素到数组开头
+(if you want your directory to be searched before the default Ruby
+ones—useful if you want to override Ruby’s standard libraries).
+
+
+

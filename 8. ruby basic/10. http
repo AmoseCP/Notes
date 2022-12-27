@@ -1,0 +1,16 @@
+require 'net/http'
+uri = URI('https://ruby-doc.org')
+http_request = Net::HTTP.new(uri.host, uri.port)
+http_request.use_ssl = true
+response = http_request.get('/')
+puts response.body.force_encoding("ISO-8859-1")
+=====================或者================================
+require 'net/http'
+url = URI.parse('https://ruby-doc.org/')
+response = Net::HTTP.start(url.host, url.port, use_ssl: true) do |http|
+  http.get(url.path)
+end
+content = response.body
+puts content.class
+
+# => String

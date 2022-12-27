@@ -1,0 +1,30 @@
+列出本地所有已安装的gem及其版本号,命令：
+ gem list
+
+列出rubygems.org中的gem及其版本号,命令：
+gem list --remote
+
+安装gem
+gem install gem_name
+
+安装特定版本的gem
+gem install -v 0.10.2 gem_name
+
+使用gem
+require 'chronic'
+puts Chronic.parse('may 10th')
+
+更新所有gem到最新版
+gem update
+
+更新指定gem到最新版本
+gem update gem_name
+
+卸载gem
+gem uninstall gem_name
+
+bundler是项目依赖管理工具，安装ruby的时候，默认是自带的，当然也可以确定是否已经安装：
+gem install bundler
+
+
+
