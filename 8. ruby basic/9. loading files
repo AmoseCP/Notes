@@ -1,3 +1,8 @@
 load 每次使用会重新加载外部文件一次，需要加上文件的扩展名
 require和require_relative仅加载外部文件一次
 require './文件'相当于require_relative'文件'，默认文件扩展名为.rb 
+
+Note: 
+Ruby programmers nearly always use require or require_relative
+rather than load. The effects of load are useful only if the code in the external file
+has changed or if it contains active code that will be executed immediately.
