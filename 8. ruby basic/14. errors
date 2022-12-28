@@ -1,0 +1,31 @@
+class Person
+  def initialize(name)
+    raise ArgumentError, "No name present" if name.empty?
+  end
+end
+fred = Person.new('')
+
+# => ArgumentError: No name present
+
+===================================================================
+自定义异常
+class BadDataException < RuntimeError
+end
+class Person
+  def initialize(name)
+    raise BadDataException, "No name present" if name.empty?
+  end
+end
+
+fred = Person.new('')
+
+# => BadDataException (No name present)
+===================================================================
+begin
+  puts 10 / 0
+rescue
+  puts "You caused an error!"
+end
+
+# => "You caused an error!"
+====================================================================
