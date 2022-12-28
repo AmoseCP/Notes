@@ -1,0 +1,74 @@
+RDoc calls itself a “Document Generator for Ruby Source.”
+生成html文档格式的方式：
+rdoc file_name.rb 
+不加文件名的话，会将目录下所有ruby文件生成文档
+
+以下注释格式，RDoc可以生成有层次的html文档：
+
+#= This is a 1st level heading
+#
+#
+#* First item in an outer list
+#  * First item in an inner list
+#  * Second item in an inner list
+#* Second item in an outer list
+#  * Only item in this inner list
+#
+#== This is a second level heading
+#
+#Visit https://www.apress.com
+#
+#== Test of text formatting features
+#
+#Want to see *bold* or _italic_ text? You can even embed
+#+text that looks like code+ by surrounding it with plus
+#symbols. Indented code will be automatically formatted:
+#
+# class MyClass
+#  def method_name
+#    puts "test"
+#  end
+# end
+class MyClass
+end
+
+============================================================================
+:nodoc: Modifier
+:nodoc: 可以忽略不需要生成文档的部分
+示例
+# This is a class that does nothing
+class MyClass
+ # This method is documented
+  def some_method
+  end
+  def secret_method #:nodoc:
+  end
+end
+在上面示例中，RDoc将会忽略secret_method 
+用#:nodoc: all可以忽略当前和以下所有
+================================================================================
+RDoc options:
+
+• --all: Usually RDoc processes only public methods, but --all forces
+RDoc to document all methods within the source files.
+• --fmt <format name>: Produce documentation in a certain format
+(which currently includes darkfish, pot, and ri).
+• --help: Get help with using RDoc’s command-line options and find
+out which output formatters are available.
+• --main <name>: Set the class, module, or file that appears as the main
+index page for the documentation to <name> (e.g., rdoc --main MyClass).
+===============================================================================
+Turning RDoc Processing On and Off
+You can stop RDoc from processing comments temporarily using #++ and #--
+例如：
+# This section is documented and read by RDoc.
+#--
+# This section is hidden from RDoc and could contain developer
+# notes, private messages between developers, etc.
+#++
+# RDoc begins processing again here after the ++.
+================================================================================
+Note RDoc doesn’t process comments that are within methods, so your usual
+code comments are not used in the documentation produced. RDoc will also not
+process comments that are separated from other comments with blank lines.
+=================================================================================
